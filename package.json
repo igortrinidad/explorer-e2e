@@ -3,6 +3,7 @@
     "cypress:open": "cypress open"
   },
   "devDependencies": {
-    "cypress": "^12.3.0"
+    "cypress": "^12.3.0",
+    "cypress-localstorage-commands": "^2.2.2"
   }
 }
