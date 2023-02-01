@@ -1,0 +1,23 @@
+name: STAGING Cypress Tests
+
+on:
+  pull_request:
+    types: [synchronize, opened]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5.2.0 # use the explicit version number
+        with:
+          build: npm run build
+          start: npm start
+        env: 
+          # get branch name and extract using regex DDEV-1234
+          CYPRESS_BRANCH: ${{ github.event.pull_request.head.ref }}
+          CYPRESS_APP_BASE_URL: ${{ event.pull_request.head.repo.html_url }}

@@ -1,27 +1,15 @@
 /// <reference types="cypress" />
 
+// ignore uncaught exceptions / network errors
 Cypress.on('uncaught:exception', (err, runnable) => {
-  // returning false here prevents Cypress from
-  // failing the test
   return false
 })
-
-// Welcome to Cypress!
-//
-// This spec file contains a variety of sample tests
-// for a todo list app that are designed to demonstrate
-// the power of writing tests in Cypress.
-//
-// To learn more about how Cypress works and
-// what makes it such an awesome testing tool,
-// please read our getting started guide:
-// https://on.cypress.io/introduction-to-cypress
 
 describe('Explorer user login', () => {
 
 
   /**
-   * Select a jurisdiction
+   * Select a jurisdiction before all and save the state of the app
    */
   before(() => {
     cy.visit('http://localhost:8080')
@@ -36,6 +24,7 @@ describe('Explorer user login', () => {
     cy.visit('http://localhost:8080')
   })
 
+  // Save the state after each
   afterEach(() => {
     cy.saveLocalStorage()
   })
