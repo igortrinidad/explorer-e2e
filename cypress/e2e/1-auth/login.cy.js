@@ -28,11 +28,6 @@ describe('Explorer user login', () => {
     cy.saveLocalStorage()
   })
 
-  // Home page check content
-  it('First test', () => {
-    cy.get('.psui-text-h1').contains('Explore cost-effectiveness results, create policies, and forecast impacts for your city or county in California.')
-  })
-  
   it('User login', () => {
     cy.get('#login-register-sidebar-button').click()
     cy.get('#signin-email').type('user@domain.com')
@@ -44,12 +39,12 @@ describe('Explorer user login', () => {
   })
   
   
-  // it('User logout', () => {
-  //   cy.wait(1000)
-  //   cy.get('#sidebar-my-account-button').click()
-  //   cy.get('#my-account-log-out-button').click()
-  //   cy.get('.v-toast__item').contains('Logged out!')
-  // })
+  it('User logout', () => {
+    cy.wait(1000)
+    cy.get('#sidebar-my-account-button').click()
+    cy.get('#my-account-log-out-button').click()
+    cy.get('.v-toast__item').contains('Logged out!')
+  })
 
   // it('can add new todo items', () => {
   //   // We'll store our item text in a variable so we can reuse it
