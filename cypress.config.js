@@ -9,4 +9,8 @@ module.exports = defineConfig({
       return config;
     },
   },
+
+  env: {
+    BRANCH: 'DDEV-477'
+  }
 });

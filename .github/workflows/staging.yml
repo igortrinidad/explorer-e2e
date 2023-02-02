@@ -13,11 +13,7 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v5.2.0 # use the explicit version number
-        with:
-          build: npm run build
-          start: npm start
+        uses: cypress-io/github-action@v5 # use the explicit version number
         env: 
           # get branch name and extract using regex DDEV-1234
           CYPRESS_BRANCH: ${{ github.event.pull_request.head.ref }}
-          CYPRESS_APP_BASE_URL: ${{ event.pull_request.head.repo.html_url }}

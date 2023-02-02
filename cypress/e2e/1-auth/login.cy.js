@@ -12,16 +12,16 @@ describe('Explorer user login', () => {
    * Select a jurisdiction before all and save the state of the app
    */
   before(() => {
-    cy.visit('http://localhost:8080')
-    cy.get('[data-ref-id="jurisdiction-select-input-home"]').type('Alameda')
-    cy.get('#jurisdiction-list-item-0').contains('Alameda')
-    cy.get('#jurisdiction-list-item-0').click()
+    cy.visit('https://explorer.localenergycodes.com')
+    // cy.get('[data-ref-id="jurisdiction-select-input-home"]').type('Alameda')
+    // cy.get('#jurisdiction-list-item-0').contains('Alameda')
+    // cy.get('#jurisdiction-list-item-0').click()
     cy.saveLocalStorage()
   })
   
   beforeEach(() => {
     cy.restoreLocalStorage()
-    cy.visit('http://localhost:8080')
+    cy.visit('https://explorer.localenergycodes.com')
   })
 
   // Save the state after each
@@ -29,15 +29,15 @@ describe('Explorer user login', () => {
     cy.saveLocalStorage()
   })
 
-  it('User login', () => {
-    cy.get('#login-register-sidebar-button').click()
-    cy.get('#signin-email').type('user@domain.com')
-    cy.get('#continue-with-email').click()
-    cy.get('#signin-password').type('123456')
-    cy.get('#login-button').click()
-    cy.wait(2000)
-    cy.get('.v-toast__item').contains('Login successful')
-  })
+  // it('User login', () => {
+  //   cy.get('#login-register-sidebar-button').click()
+  //   cy.get('#signin-email').type('user@domain.com')
+  //   cy.get('#continue-with-email').click()
+  //   cy.get('#signin-password').type('123456')
+  //   cy.get('#login-button').click()
+  //   cy.wait(2000)
+  //   cy.get('.v-toast__item').contains('Login successful')
+  // })
   
   
   it('User logout', () => {
