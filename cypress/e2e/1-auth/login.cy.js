@@ -12,7 +12,7 @@ describe('Explorer user login', () => {
    * Select a jurisdiction before all and save the state of the app
    */
   before(() => {
-    cy.visit('https://explorer.localenergycodes.com')
+    cy.visit(Cypress.env('APP_BASE_URL'))
     // cy.get('[data-ref-id="jurisdiction-select-input-home"]').type('Alameda')
     // cy.get('#jurisdiction-list-item-0').contains('Alameda')
     // cy.get('#jurisdiction-list-item-0').click()
@@ -21,7 +21,7 @@ describe('Explorer user login', () => {
   
   beforeEach(() => {
     cy.restoreLocalStorage()
-    cy.visit('https://explorer.localenergycodes.com')
+    cy.visit(Cypress.env('APP_BASE_URL'))
   })
 
   // Save the state after each
