@@ -30,11 +30,11 @@ jobs:
           echo "JIRA ticket: $jira_ticket"
           branch_specific_link="https://cce-${jira_ticket}-staging.vercel.app"
           echo "Branch specific link: $branch_specific_link"
-          echo "{branch_specific_link}={123}" >> $GITHUB_ENV
+          echo "branch_specific_link=$branch_specific_link" >> $GITHUB_ENV
 
       - name: Test branch_specific_link env var
         run: |
-          echo "${{ github.ref }}"
+          echo "${{ env.branch_specific_link }}"
 
       - name: Cypress run
         uses: cypress-io/github-action@v4
