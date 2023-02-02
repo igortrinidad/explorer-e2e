@@ -29,6 +29,10 @@ describe('Explorer user login', () => {
     cy.saveLocalStorage()
   })
 
+  it('First test', () => {
+    cy.get('.psui-text-h1').contains('Explore cost-effectiveness results, create policies, and forecast impacts for your city or county in California.')
+  })
+
   // it('User login', () => {
   //   cy.get('#login-register-sidebar-button').click()
   //   cy.get('#signin-email').type('user@domain.com')
