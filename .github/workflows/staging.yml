@@ -31,6 +31,7 @@ jobs:
           echo "Branch name: $branch_name"
           echo "JIRA ticket: $jira_ticket"
           branch_specific_link="https://cee-${jira_ticket}-staging.vercel.app"
+          echo "Branch specific link: $branch_specific_link"
         env:
           branch_specific_link: $branch_specific_link
           
@@ -54,5 +55,5 @@ jobs:
           # GITHUB_TOKEN: ${{ github.token }}
 
           # VERCEL DEPLOYMENT BRANCH URL
-          CYPRESS_APP_BASE_URL: $branch_specific_link
+          CYPRESS_APP_BASE_URL: ${{ env.branch_specific_link }}
           
