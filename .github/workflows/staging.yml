@@ -30,7 +30,7 @@ jobs:
           echo "JIRA ticket: $jira_ticket"
           branch_specific_link="https://cce-${jira_ticket}-staging.vercel.app"
           echo "Branch specific link: $branch_specific_link"
-          echo "{branch_specific_link}={ github.ref }} | sed 's/refs\/heads\///' | grep -o 'DDEV-[0-9]\+'}" >> $GITHUB_ENV
+          echo "{branch_specific_link}={$branch_specific_link}" >> $GITHUB_ENV
 
       - name: Test branch_specific_link env var
         run: |
