@@ -1,6 +1,8 @@
 name: Explorer App E2E Tests
 
-on: [push]
+on: 
+  pull_request:
+    types: [synchronize, opened]
 
 permissions:
   contents: read
@@ -24,29 +26,43 @@ jobs:
           # FOR PUSH TEST - branch_name=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
       - name: Extract branch specific url based on branch name and Jira ticket pattern (DDEV-XXXX)
         run: |
-          branch_name=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
-          if [ "$branch_name" == "master" ]; then
-            branch_specific_link="https://explorer.localenergycodes.com"
-          else
-            jira_ticket=$(echo $branch_name | grep -o 'DDEV-[0-9]\+')
-            echo "Branch name: $branch_name"
-            echo "JIRA ticket: $jira_ticket"
-            branch_specific_link="https://cce-${jira_ticket}-staging.vercel.app"
-          fi
-          echo "Branch specific link: $branch_specific_link"
-          echo "branch_specific_link=$branch_specific_link" >> $GITHUB_ENV
+          branch_to_name=$(echo ${{ github.event.pull_request.base.ref }} | sed 's/refs\/heads\///')
+          echo "branch_to_name: $branch_to_name"
+          
+          branch_from_name=$(echo ${{ github.event.pull_request.head.ref }} | sed 's/refs\/heads\///')
+          echo "branch_from_name: $branch_from_name"
+          
+          jira_ticket=$(echo $branch_from_name | grep -o 'DDEV-[0-9]\+')
+          echo "JIRA ticket: $jira_ticket"
+          
+          echo "test_link_production=$test_link_production" >> $GITHUB_ENV
+          test_link_production="https://cce-${jira_ticket}-production.vercel.app"
+          
+          test_link_staging="https://cce-${jira_ticket}-staging.vercel.app"
+          echo "test_link_staging=$test_link_staging" >> $GITHUB_ENV
 
-      - name: Test branch_specific_link env var
+      - name: Test env variables to other steps
         run: |
-          echo "${{ env.branch_specific_link }}"
+          echo "${{ env.test_link_production }}"
+          echo "${{ env.test_link_staging }}"
 
-      - name: Cypress run
+      - name: Cypress run STAGING ENV
         uses: cypress-io/github-action@v4
         with:
           record: true
           parallel: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_APP_BASE_URL: ${{ env.branch_specific_link }}
+          CYPRESS_APP_BASE_URL: ${{ env.test_link_staging }}
+
+      - name: Cypress run PRODUCTION ENV
+        uses: cypress-io/github-action@v4
+        if: 'contains(github.event.pull_request.base.ref, "[master|DDEV-477]")'
+        with:
+          record: true
+          parallel: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_APP_BASE_URL: ${{ env.test_link_production }}
 
           
