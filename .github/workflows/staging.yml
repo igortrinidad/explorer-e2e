@@ -52,5 +52,5 @@ jobs:
           # GITHUB_TOKEN: ${{ github.token }}
 
           # VERCEL DEPLOYMENT BRANCH URL
-          CYPRESS_APP_BASE_URL: ${{ $branch_specific_link }}
+          CYPRESS_APP_BASE_URL: $branch_specific_link
           
