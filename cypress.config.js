@@ -12,6 +12,6 @@ module.exports = defineConfig({
 
   env: {
     RECORD_KEY: '125c5757-2501-4dac-915b-2818738ad08d',
-    CYPRESS_APP_BASE_URL: 'https://explorer.localenergycodes.com',
+    APP_BASE_URL: 'https://explorer.localenergycodes.com',
   }
 });
