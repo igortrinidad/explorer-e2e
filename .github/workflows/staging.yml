@@ -35,8 +35,8 @@ jobs:
           jira_ticket=$(echo $branch_from_name | grep -o 'DDEV-[0-9]\+')
           echo "JIRA ticket: $jira_ticket"
           
-          echo "test_link_production=$test_link_production" >> $GITHUB_ENV
           test_link_production="https://cce-${jira_ticket}-production.vercel.app"
+          echo "test_link_production=$test_link_production" >> $GITHUB_ENV
           
           test_link_staging="https://cce-${jira_ticket}-staging.vercel.app"
           echo "test_link_staging=$test_link_staging" >> $GITHUB_ENV
