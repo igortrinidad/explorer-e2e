@@ -25,10 +25,14 @@ jobs:
       - name: Extract branch specific url based on branch name and Jira ticket pattern (DDEV-XXXX)
         run: |
           branch_name=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
-          jira_ticket=$(echo $branch_name | grep -o 'DDEV-[0-9]\+')
-          echo "Branch name: $branch_name"
-          echo "JIRA ticket: $jira_ticket"
-          branch_specific_link="https://cce-${jira_ticket}-staging.vercel.app"
+          if [ "$branch_name" == "master" ]; then
+            branch_specific_link="https://explorer.localenergycodes.com"
+          else
+            jira_ticket=$(echo $branch_name | grep -o 'DDEV-[0-9]\+')
+            echo "Branch name: $branch_name"
+            echo "JIRA ticket: $jira_ticket"
+            branch_specific_link="https://cee-${jira_ticket}-staging.vercel.app"
+          fi
           echo "Branch specific link: $branch_specific_link"
           echo "branch_specific_link=$branch_specific_link" >> $GITHUB_ENV
 
