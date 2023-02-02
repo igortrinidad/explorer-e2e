@@ -20,3 +20,4 @@ jobs:
         env: 
           # get branch name and extract using regex DDEV-1234
           CYPRESS_BRANCH: ${{ github.event.pull_request.head.ref }}
+          CYPRESS_RECORD_KEY: '125c5757-2501-4dac-915b-2818738ad08d'

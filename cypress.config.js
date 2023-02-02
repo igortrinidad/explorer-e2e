@@ -11,6 +11,7 @@ module.exports = defineConfig({
   },
 
   env: {
-    BRANCH: 'DDEV-477'
+    BRANCH: 'DDEV-477',
+    RECORD_KEY: '125c5757-2501-4dac-915b-2818738ad08d'
   }
 });
