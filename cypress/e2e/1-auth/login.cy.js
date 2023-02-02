@@ -7,15 +7,14 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 describe('Explorer user login', () => {
 
-
   /**
    * Select a jurisdiction before all and save the state of the app
    */
   before(() => {
     cy.visit(Cypress.env('APP_BASE_URL'))
-    // cy.get('[data-ref-id="jurisdiction-select-input-home"]').type('Alameda')
-    // cy.get('#jurisdiction-list-item-0').contains('Alameda')
-    // cy.get('#jurisdiction-list-item-0').click()
+    cy.get('[data-ref-id="jurisdiction-select-input-home"]').type('Alameda')
+    cy.get('#jurisdiction-list-item-0').contains('Alameda')
+    cy.get('#jurisdiction-list-item-0').click()
     cy.saveLocalStorage()
   })
   
@@ -29,19 +28,20 @@ describe('Explorer user login', () => {
     cy.saveLocalStorage()
   })
 
+  // Home page check content
   it('First test', () => {
     cy.get('.psui-text-h1').contains('Explore cost-effectiveness results, create policies, and forecast impacts for your city or county in California.')
   })
-
-  // it('User login', () => {
-  //   cy.get('#login-register-sidebar-button').click()
-  //   cy.get('#signin-email').type('user@domain.com')
-  //   cy.get('#continue-with-email').click()
-  //   cy.get('#signin-password').type('123456')
-  //   cy.get('#login-button').click()
-  //   cy.wait(2000)
-  //   cy.get('.v-toast__item').contains('Login successful')
-  // })
+  
+  it('User login', () => {
+    cy.get('#login-register-sidebar-button').click()
+    cy.get('#signin-email').type('user@domain.com')
+    cy.get('#continue-with-email').click()
+    cy.get('#signin-password').type('123456')
+    cy.get('#login-button').click()
+    cy.wait(2000)
+    cy.get('.v-toast__item').contains('Login successful')
+  })
   
   
   // it('User logout', () => {

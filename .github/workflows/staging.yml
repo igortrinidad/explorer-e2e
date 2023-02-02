@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Explorer App E2E Tests
 
 on: [push]
 
@@ -8,12 +8,8 @@ permissions:
 
 jobs:
 
-
   cypress-run:
     runs-on: ubuntu-latest
-    # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
-    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-    # Also see warning here https://github.com/cypress-io/github-action#parallel
     strategy:
       fail-fast: false # https://github.com/cypress-io/github-action/issues/48
       matrix:
@@ -23,8 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-          # branch_name=$(echo ${{ github.event.pull_request.head.ref }} | sed 's/refs\/heads\///')
-      - name: Extract JIRA ticket
+          # FOR PULL REQUEST branch_name=$(echo ${{ github.event.pull_request.head.ref }} | sed 's/refs\/heads\///')
+          # FOR PUSH TEST - branch_name=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
+      - name: Extract branch specific url based on branch name and Jira ticket pattern (DDEV-XXXX)
         run: |
           branch_name=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
           jira_ticket=$(echo $branch_name | grep -o 'DDEV-[0-9]\+')
@@ -36,24 +33,11 @@ jobs:
           branch_specific_link: $branch_specific_link
           
       - name: Cypress run
-        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4
         with:
-          # Starts web server for E2E tests - replace with your own server invocation
-          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-          # start: npm start
-          # wait-on: 'http://localhost:3000' # Waits for above
-          # Records to Cypress Cloud
-          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
           record: true
-          parallel: false # Runs test in parallel using settings above
+          parallel: true
         env:
-          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
-          # in GitHub repo → Settings → Secrets → Actions
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-          # GITHUB_TOKEN: ${{ github.token }}
-
-          # VERCEL DEPLOYMENT BRANCH URL
           CYPRESS_APP_BASE_URL: ${{ env.branch_specific_link }}
           
