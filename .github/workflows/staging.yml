@@ -34,7 +34,7 @@ jobs:
 
       - name: Test branch_specific_link env var
         run: |
-          echo "${{ env.branch_specific_link }}"
+          echo "${{ github.ref }}"
 
       - name: Cypress run
         uses: cypress-io/github-action@v4
