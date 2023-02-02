@@ -11,7 +11,6 @@ module.exports = defineConfig({
   },
 
   env: {
-    RECORD_KEY: '125c5757-2501-4dac-915b-2818738ad08d',
-    APP_BASE_URL: 'https://explorer.localenergycodes.com',
+    RECORD_KEY: '125c5757-2501-4dac-915b-2818738ad08d'
   }
 });
