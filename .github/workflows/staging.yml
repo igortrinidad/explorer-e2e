@@ -40,5 +40,5 @@ jobs:
           parallel: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_APP_BASE_URL: ${{ env.branch_specific_link }}
+          CYPRESS_APP_BASE_URL: ${{ $branch_specific_link }}
           
