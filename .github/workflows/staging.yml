@@ -31,6 +31,8 @@ jobs:
           echo "Branch name: $branch_name"
           echo "JIRA ticket: $jira_ticket"
           branch_specific_link="https://cee-${jira_ticket}-staging.vercel.app"
+        env:
+          branch_specific_link: $branch_specific_link
           
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
