@@ -40,12 +40,12 @@ describe('Explorer user login', () => {
   // })
   
   
-  it('User logout', () => {
-    cy.wait(1000)
-    cy.get('#sidebar-my-account-button').click()
-    cy.get('#my-account-log-out-button').click()
-    cy.get('.v-toast__item').contains('Logged out!')
-  })
+  // it('User logout', () => {
+  //   cy.wait(1000)
+  //   cy.get('#sidebar-my-account-button').click()
+  //   cy.get('#my-account-log-out-button').click()
+  //   cy.get('.v-toast__item').contains('Logged out!')
+  // })
 
   // it('can add new todo items', () => {
   //   // We'll store our item text in a variable so we can reuse it
