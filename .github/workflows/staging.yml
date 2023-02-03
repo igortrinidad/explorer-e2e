@@ -70,5 +70,7 @@ jobs:
           # re-enable PR comment bot
           COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
           
