@@ -1,8 +1,13 @@
 name: Explorer App E2E Tests
 
-on: 
-  pull_request:
-    types: [synchronize, opened]
+on:
+  workflow_run:
+    workflows: ["Deploy PRODUCTION environment"]
+    types: [completed]
+    branches:    
+      - master
+      - 'DDEV-**'
+      - 'DDEV-477'
 
 permissions:
   contents: read
