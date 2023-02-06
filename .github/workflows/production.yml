@@ -16,3 +16,4 @@ jobs:
       - name: Test env variables to other steps
         run: |
           echo "Something"
+          
