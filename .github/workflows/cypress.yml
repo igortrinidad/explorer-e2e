@@ -2,12 +2,9 @@ name: E2E Cypress
 
 on:
   workflow_run:
-    workflows: ["Deploy Production"]
-    types: [completed]
-    branches:    
-      - master
-      - 'DDEV-**'
-      - 'DDEV-477'
+    workflows: [ "Deploy Production" ]
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
